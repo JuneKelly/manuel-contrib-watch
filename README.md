@@ -12,6 +12,11 @@ the `inotifywait` program.
 
 # Usage
 
+Start the `manuel_watch` task, providing a directory to watch over, and an
+associative-array of file-patterns to watch for and corresponding actions
+to take when a file matchin that pattern changes.
+
+Example:
 ```bash
 # In a manuelfile
 
