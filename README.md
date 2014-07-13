@@ -1,4 +1,4 @@
-# manuel_contrib_watch
+# manuel-contrib-watch
 
 A plugin for [manuel](https://github.com/ShaneKilkelly/manuel), which
 watches for changes in a directory and reacts with user-defined actions
