@@ -10,6 +10,16 @@ This plugin depends on the `inotify-tools` package for linux, specifically
 the `inotifywait` program.
 
 
+# Installation
+
+Clone this repository into your manuel plugins
+directory ($HOME/.manuel.d/plugins by default):
+```bash
+$ cd ~/.manuel.d/plugins
+$ git clone git://github.com/ShaneKilkelly/manuel-contrib-watch.git
+```
+
+
 # Usage
 
 Start the `manuel_watch` task, providing a directory to watch over, and an
