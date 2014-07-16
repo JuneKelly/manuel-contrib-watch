@@ -41,3 +41,10 @@ In the above example, if the file `./assets/js/app.js` changes, the first item i
 the `actions` associative-array will match, and the corresponding command
 string will be run.
 
+
+## Changelog
+
+### v1.0.0
+
+- remove dependency on `inotify-tools`, making the `manuel_watch` task
+  work on any unix system where `find` and either `md5` or `md5sum` are available
