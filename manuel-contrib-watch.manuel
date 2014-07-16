@@ -30,16 +30,22 @@ function _get_md5_command {
   fi
 }
 
+# hash the results of a find
 function _hash_find {
-  regex_pattern=$1
-  result=$(find $target_dir -regex "$k" -printf '%Tc %p\n' | $md5_command)
+  search_dir=$1
+  regex_pattern=$2
+  md5_command=$(_get_md5_command)
+
+  result=$(
+    find $search_dir -regex "$regex_pattern" -printf '%Tc %p\n' | $md5_command
+  )
+
   echo "$result"
 }
 
 function manuel_watch {
   target_dir=`readlink -f $1` # a directory to watch for changes in
-  actions=$2          # associative array of regex=>command
-  md5_command=$(_get_md5_command)
+  actions=$2                  # associative array of regex=>command
 
   # keep an associative array of hashes of results
   declare -A last_results
@@ -50,11 +56,11 @@ function manuel_watch {
     if [[ "$k" == 0 ]]; then
       continue
     fi
-    h=$(_hash_find "$k")
+    h=$(_hash_find "$target_dir" "$k")
     last_results["$k"]=$h
   done
 
-  echo -e ">> Watching $target_directory"
+  echo -e ">> Watching $target_dir"
 
   while true; do
 
@@ -65,12 +71,12 @@ function manuel_watch {
       fi
 
       # hash result
-      h=$(_hash_find "$k")
+      h=$(_hash_find "$target_dir" "$k")
 
       # check against previous hash
       if [[ ${last_results["$k"]} != $h ]]; then
         last_results["$k"]=$h
-        echo "CHANGE"
+        echo ">> Change detected for pattern $k"
         eval ${actions[$k]}
       fi
     done
