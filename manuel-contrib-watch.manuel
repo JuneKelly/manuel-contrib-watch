@@ -12,13 +12,14 @@
 #
 # function do_something {
 #   declare -A actions=(
-#     ["\.js$"]="echo 'we should concat and minify the js again'"
-#     ["\.go$"]="go build ."
+#     [".*\.js$"]="echo 'we should concat and minify the js again'"
+#     [".*\.go$"]="go build ."
 #   )
 #
 #   manuel_watch . actions
 # }
 
+# get the systems md5 utility
 function _get_md5_command {
   if [[ ! -z $(command -v md5) ]]; then
     echo $(which md5)
@@ -29,6 +30,7 @@ function _get_md5_command {
     exit 1
   fi
 }
+
 
 # hash the results of a find
 function _hash_find {
@@ -43,6 +45,8 @@ function _hash_find {
   echo "$result"
 }
 
+
+# main task
 function manuel_watch {
   target_dir=`readlink -f $1` # a directory to watch for changes in
   actions=$2                  # associative array of regex=>command
