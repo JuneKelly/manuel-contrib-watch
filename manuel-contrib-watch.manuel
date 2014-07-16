@@ -19,6 +19,17 @@
 #   manuel_watch . actions
 # }
 
+function _get_md5_command {
+  if [[ ! -z $(command -v md5) ]]; then
+    echo $(which md5)
+  elif [[ ! -z $(command -v md5sum) ]]; then
+    echo $(which md5sum)
+  else
+    echo -e ">> Error: neither md5 nor md5sum found on PATH" 1>&2
+    exit 1
+  fi
+}
+
 
 function manuel_watch {
   target_dir=`readlink -f $1` # a directory to watch for changes in
