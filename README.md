@@ -1,7 +1,9 @@
 # manuel-contrib-watch
 
 A plugin for [manuel](https://github.com/ShaneKilkelly/manuel), which
-watches for changes in a directory and reacts with user-defined actions
+watches for changes in a directory and reacts with user-defined actions.
+
+This plugin currently requires bash version 4 or higher.
 
 
 # Installation
@@ -47,4 +49,4 @@ string will be run.
 ### v1.0.0
 
 - remove dependency on `inotify-tools`, making the `manuel_watch` task
-  work on any unix system where `find` and either `md5` or `md5sum` are available
+  work on any unix system where `find` and either `md5` or `md5sum` are available.
