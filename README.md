@@ -19,7 +19,7 @@ $ git clone git://github.com/ShaneKilkelly/manuel-contrib-watch.git
 # Usage
 
 Start the `manuel_watch` task, providing a directory to watch over, and an
-associative-array of regex-patterns to watch for and corresponding actions
+array of regex-patterns to watch for and corresponding actions
 to take when a file matchin that pattern changes.
 
 Example:
@@ -30,18 +30,32 @@ load_plugin manuel-contrib-watch
 
 function wait_for_change {
   declare -A actions=(
-    [".*\.js$"]="echo 'we should concat and minify the js again'"
-    [".*\.go$"]="go build ."
+    ".*\.js$:echo 'we should concat and minify the js again'"
+    ".*\.go$:go build ."
   )
 
   manuel_watch . actions
 }
 ```
 
-The regex patterns should be compatible with the unix `find` command.
+The regex patterns should be compatible with the unix `find` command,
+and separated from the actions by a ':' character.
 In the above example, if the file `./assets/js/app.js` changes, the first item in
 the `actions` associative-array will match, and the corresponding command
 string will be run.
+
+If you would prefer to use another character to separate the regex pattern from the action string, just overide the `MANUEL_WATCH_SEPARATOR` variable.
+```
+function wait_for_change {
+  export MANUEL_WATCH_SEPARATOR="@"
+  declare -A actions=(
+    ".*\.js$@echo 'we should concat and minify the js again'"
+    ".*\.go$@go build ."
+  )
+
+  manuel_watch . actions
+}
+```
 
 
 ## Changelog

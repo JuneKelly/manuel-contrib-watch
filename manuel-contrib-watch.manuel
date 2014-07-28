@@ -11,9 +11,9 @@
 # Example:
 #
 # function do_something {
-#   declare -A actions=(
-#     [".*\.js$"]="echo 'we should concat and minify the js again'"
-#     [".*\.go$"]="go build ."
+#   declare -a actions=(
+#     ".*\.js$:echo 'we should concat and minify the js again'"
+#     ".*\.go$:go build ."
 #   )
 #
 #   manuel_watch . actions
