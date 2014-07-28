@@ -5,18 +5,19 @@
 # act on changes to files
 
 
-# Usage: manuel_watch [directory] [actions]
-# where actions is an associative array.
+# Usage: manuel_watch [directory]
+# must declare actions as an associative array.
 #
 # Example:
 #
 # function do_something {
+#
 #   declare -A actions=(
 #     [".*\.js$"]="echo 'we should concat and minify the js again'"
 #     [".*\.go$"]="go build ."
 #   )
 #
-#   manuel_watch . actions
+#   manuel_watch .
 # }
 
 # get the systems md5 utility
@@ -49,7 +50,6 @@ function _hash_find {
 # main task
 function manuel_watch {
   target_dir=`readlink -f $1` # a directory to watch for changes in
-  actions=$2                  # associative array of regex=>command
 
   # keep an associative array of hashes of results
   declare -A last_results
