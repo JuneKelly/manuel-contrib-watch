@@ -18,9 +18,10 @@ $ git clone git://github.com/ShaneKilkelly/manuel-contrib-watch.git
 
 # Usage
 
-First declare an associative array of regex-patterns to watch for and
-corresponding actions to take when a file matching that pattern changes.
-Then call the `manuel_watch` function with a directory to watch over:
+First declare an associative array called `actions`, of regex-patterns
+to watch for and corresponding actions to take when a file matching
+that pattern changes. Then call the `manuel_watch` function with a
+directory to watch over:
 
 Example:
 ```bash
@@ -29,6 +30,7 @@ Example:
 load_plugin manuel-contrib-watch
 
 function wait_for_change {
+
   declare -A actions=(
     [".*\.js$"]="echo 'we should concat and minify the js again'"
     [".*\.go$"]="go build ."
@@ -45,6 +47,11 @@ string will be run.
 
 
 # Changelog
+
+# v1.0.1
+
+- clarify that the actions array is declared by the caller,
+  and is not 'passed in' to the task.
 
 ## v1.0.0
 

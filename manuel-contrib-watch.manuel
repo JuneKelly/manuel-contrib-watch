@@ -6,7 +6,7 @@
 
 
 # Usage: manuel_watch [directory]
-# must declare actions as an associative array.
+# must declare `actions` as an associative array.
 #
 # Example:
 #
