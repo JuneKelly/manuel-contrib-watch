@@ -23,9 +23,9 @@
 # get the systems md5 utility
 function _get_md5_command {
   if [[ ! -z $(command -v md5) ]]; then
-    echo $(which md5)
+    echo "$(which md5)"
   elif [[ ! -z $(command -v md5sum) ]]; then
-    echo $(which md5sum)
+    echo "$(which md5sum)"
   else
     echo -e ">> Error: neither md5 nor md5sum found on PATH" 1>&2
     exit 1
@@ -40,7 +40,7 @@ function _hash_find {
   md5_command=$(_get_md5_command)
 
   result=$(
-    find $search_dir -regex "$regex_pattern" -printf '%Tc %p\n' | $md5_command
+    find "$search_dir" -regex "$regex_pattern" -printf '%Tc %p\n' | $md5_command
   )
 
   echo "$result"
@@ -49,7 +49,7 @@ function _hash_find {
 
 # main task
 function manuel_watch {
-  target_dir=`readlink -f $1` # a directory to watch for changes in
+  target_dir=`readlink -f "$1"` # a directory to watch for changes in
 
   # keep an associative array of hashes of results
   declare -A last_results
@@ -81,7 +81,7 @@ function manuel_watch {
       if [[ ${last_results["$k"]} != $h ]]; then
         last_results["$k"]=$h
         echo ">> Change detected for pattern $k"
-        eval ${actions[$k]}
+        eval "${actions[$k]}"
       fi
     done
 
