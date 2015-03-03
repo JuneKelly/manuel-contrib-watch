@@ -49,7 +49,7 @@ function _hash_find {
 
 # main task
 function manuel_watch {
-  target_dir=`readlink -f "$1"` # a directory to watch for changes in
+  target_dir=$(readlink -f "$1") # a directory to watch for changes in
 
   # keep an associative array of hashes of results
   declare -A last_results
