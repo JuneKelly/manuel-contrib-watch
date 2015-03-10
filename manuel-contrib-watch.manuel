@@ -55,7 +55,7 @@ function manuel_watch {
   declare -A last_results
 
   # get initial hashes
-  for k in ${!actions[@]}
+  for k in "${!actions[@]}"
   do
     if [[ "$k" == 0 ]]; then
       continue
@@ -68,7 +68,7 @@ function manuel_watch {
 
   while true; do
 
-    for k in ${!actions[@]}
+    for k in "${!actions[@]}"
     do
       if [[ "$k" == "0" ]]; then
         continue
