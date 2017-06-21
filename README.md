@@ -18,10 +18,11 @@ $ git clone git://github.com/ShaneKilkelly/manuel-contrib-watch.git
 
 # Usage
 
-First declare an associative array called `actions`, of regex-patterns
-to watch for and corresponding actions to take when a file matching
-that pattern changes. Then call the `manuel_watch` function with a
-directory to watch over:
+First declare an associative array called `actions`,
+of [glob patterns](http://mywiki.wooledge.org/glob#Globs) to watch for
+and corresponding actions to take when a file matching that pattern
+changes. Then call the `manuel_watch` function with a directory to
+watch over:
 
 Example:
 ```bash
@@ -32,15 +33,15 @@ load_plugin manuel-contrib-watch
 function wait_for_change {
 
   declare -A actions=(
-    [".*\.js$"]="echo 'we should concat and minify the js again'"
-    [".*\.go$"]="go build ."
+    ["*?js"]="echo 'we should concat and minify the js again'"
+    ["*?go"]="go build ."
   )
 
   manuel_watch .
 }
 ```
 
-The regex patterns should be compatible with the unix `find` command.
+The glob patterns should be compatible with the unix `find` command.
 In the above example, if the file `./assets/js/app.js` changes, the first item in
 the `actions` associative-array will match, and the corresponding command
 string will be run.
