@@ -36,11 +36,11 @@ function _get_md5_command {
 # hash the results of a find
 function _hash_find {
   search_dir=$1
-  regex_pattern=$2
+  glob_pattern=$2
   md5_command=$(_get_md5_command)
 
   result=$(
-    find "$search_dir" -regex "$regex_pattern" -printf '%Tc %p\n' | $md5_command
+    find "$search_dir" -name "$glob_pattern" -printf '%Tc %p\n' | $md5_command
   )
 
   echo "$result"
